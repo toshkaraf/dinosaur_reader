@@ -139,11 +139,12 @@ public class HorisontalTetris implements Screen, InputProcessor {
                 break;
             case ShowPrise:
                 if (scorePanel.getScore() == GameInfo.MAX_SCORE) {
-                    batch.setProjectionMatrix(camera.projection);
-                    batch.setTransformMatrix(camera.view);
-                    batch.begin();
-                    batch.draw(dinosaur, player.getX(), player.getY());
-                    batch.end();
+//                    batch.setProjectionMatrix(camera.projection);
+//                    batch.setTransformMatrix(camera.view);
+//                    batch.begin();
+//                    batch.draw(dinosaur, player.getX(), player.getY());
+//                    batch.end();
+                    game.setScreen(new PrizeScreenMenu(game));
                 } else {
                     GameManager.renderMode = GameManager.RenderMode.ShowSyllables;
                     syllablePanel.pushSyllable(syllableCounter);
