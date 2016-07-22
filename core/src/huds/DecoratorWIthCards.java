@@ -70,7 +70,7 @@ public class DecoratorWIthCards {
 //    }
 
     public void createAndPushCards() {
-        for (int a = 0; a < GameManager.getInstance().wordsForQuestion.length; a++) {
+        for (int a = 0; a < GameManager.getInstance().wordsForQuestion.size; a++) {
             if (a%2 == 0) pictureCardsArray.addActor(new PictureCard(beigeCard, a));
         else pictureCardsArray.addActor(new PictureCard(greenCard, a));
 

@@ -30,7 +30,7 @@ public class SyllablePanel {
     private Stage stage;
     private Viewport gameViewport;
     private Group syllableCards;
-    Sprite bg = new Sprite(new Texture("cards/card_of_portrait.png"));
+    Sprite bg = new Sprite(new Texture("cards/card_of_syllable_beige.png"));
 
 
     public SyllablePanel(MainGame game) {

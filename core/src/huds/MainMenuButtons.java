@@ -25,7 +25,7 @@ public class MainMenuButtons extends MenuButtons {
         button_2 = new MenuCard(blueCard, 800, GameInfo.WORLD_HEIGHT / 2 + 30, "СЛОВА ИЗ ТРЕХ СЛОГОВ", 20);
         button_3 = new MenuCard(redCard, -400, GameInfo.WORLD_HEIGHT / 2 - 30, "КАТЕГОРИЯ ПРИЗОВ", 20);
         button_4 = new MenuCard(blueCard, 800, GameInfo.WORLD_HEIGHT / 2 - 90, "ВКЛ. / ВЫКЛ. МУЗЫКУ", 20);
-        button_5 = new MenuCard(redCard, -400, GameInfo.WORLD_HEIGHT / 2 - 150, "ВКЛ. / ВЫКЛ. МУЗЫКУ", 20);
+        button_5 = new MenuCard(redCard, -400, GameInfo.WORLD_HEIGHT / 2 - 150, "ВКЛ. / ВЫКЛ. ЗВУКИ", 20);
 
     }
 
@@ -36,7 +36,7 @@ public class MainMenuButtons extends MenuButtons {
         button_1.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttons) {
-                GameManager.getInstance().quantityOfSyllables = 2;
+                GameManager.getInstance().setQuantityOfSyllables(2);
                 hideMenu_startNewScreen(new HorisontalTetris(game));
                 return true;
             }
@@ -45,7 +45,7 @@ public class MainMenuButtons extends MenuButtons {
         button_2.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttons) {
-                GameManager.getInstance().quantityOfSyllables = 3;
+                GameManager.getInstance().setQuantityOfSyllables(3);
                 hideMenu_startNewScreen(new HorisontalTetris(game));
                 return true;
             }

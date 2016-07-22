@@ -9,7 +9,6 @@ import com.badlogic.gdx.utils.Base64Coder;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
 
-import cards.SyllableCard;
 import models.WordToRead;
 
 /**
@@ -22,21 +21,21 @@ public class GameManager {
     private Music music;
     public Array<String> prizeNamesArray = new Array<String>();
 
-
-
     public enum RenderMode {PrepareField, Portrait, ShowSyllables, PlayGame, ShowPrise, PullPictureCards, MoveCamToStartPosition, ShowReviewPanel, HideReviewPanel}
 
     public enum TypeOfCard {BlueDate, RedDate, BlueName, RedName}
 
     private static GameManager ourInstance = new GameManager();
-    public WordToRead[] wordsForQuestion = new WordToRead[4];
+    //    public WordToRead[] wordsForQuestion = new WordToRead[4];
     private static Json json = new Json();
     private FileHandle fileHandle = Gdx.files.local("bin/GameData.json");
+    public Array<WordToRead> wordsForQuestion = new Array<WordToRead>();
     public static Array<WordToRead> WORDS_ARRAY;
     //    public static int firstPresidentInRange; // number in array (from 0)
 //    public static int lastPresidentInRange; // number in array
     public int currentRightWord; // number in array
     public int quantityOfSyllables = 0;
+    private String syllablesFileName;
     public static RenderMode renderMode;
     public GameData gameData = new GameData();
     public Sound[] rightSounds = new Sound[6];
@@ -72,13 +71,27 @@ public class GameManager {
         gameData = json.fromJson(GameData.class, Base64Coder.decodeString(fileHandle.readString()));
     }
 
+    public void setQuantityOfSyllables(int quantityOfSyllables) {
+        this.quantityOfSyllables = quantityOfSyllables;
+        switch (quantityOfSyllables) {
+            case 2:
+                syllablesFileName = "two_syllables";
+                break;
+            case 3:
+                syllablesFileName = "three_syllables";
+// case 4:
+//                syllablesFileName = "four_syllables";
+        }
+    }
+
+    public String getSyllablesFileName() {
+        return syllablesFileName;
+    }
+
     private Array<WordToRead> initializeWordsArray(int quantityOfSyllables) {
         initPrizePictureArray();
         Array<WordToRead> wordsArray = new Array<WordToRead>();
-        String fileName;
-        if (quantityOfSyllables == 2) fileName = "data/two_syllables.json";
-        else fileName = "data/three_syllables.json";
-        Array<JsonValue> list = json.fromJson(Array.class, Gdx.files.internal(fileName));
+        Array<JsonValue> list = json.fromJson(Array.class, Gdx.files.internal("data/" + syllablesFileName + ".json"));
         for (JsonValue v : list) {
             wordsArray.add(json.readValue(WordToRead.class, v));
             System.out.println(wordsArray.get(0).getName());
@@ -112,25 +125,34 @@ public class GameManager {
         return wrongSounds[soundsCounter];
     }
 
-    public void firstInitNewGame() {
+    public void initNewGame() {
         WORDS_ARRAY = initializeWordsArray(quantityOfSyllables);
-        initNewGame();
+        initNewTask();
     }
 
-    public boolean initNewGame() {
+    public boolean initNewTask() {
         renderMode = RenderMode.PrepareField;
-        initWordsListForQuestionsArray();
-        setCurrentRightWord();
+        initWordsListForQuestionsArrayAndRightWord();
         return true;
     }
 
-    private void setCurrentRightWord() {
-//        currentRightWord = MathUtils.random(0, wordsForQuestion.length-1);
-        currentRightWord = 0;
-
+    public void initWordsListForQuestionsArrayAndRightWord() {
+        WORDS_ARRAY.shuffle();
+        WordToRead word = WORDS_ARRAY.get(0);
+        wordsForQuestion.clear();
+        wordsForQuestion.add(word);
+        for (int i = 1; i <= 3; i++)
+            wordsForQuestion.add(WORDS_ARRAY.get(i));
+        wordsForQuestion.shuffle();
+        currentRightWord = wordsForQuestion.indexOf(word, true);
     }
 
-    public void initPrizePictureArray(){
+    public void clearRightWord() {
+        WORDS_ARRAY.removeValue(wordsForQuestion.get(currentRightWord), true);
+    }
+
+
+    public void initPrizePictureArray() {
         prizeNamesArray.clear();
         String fileName;
         fileName = "data/dinosaurs.json";
@@ -147,12 +169,7 @@ public class GameManager {
 //
 //    }
 //
-    public void initWordsListForQuestionsArray() {
-//        WORDS_ARRAY.shuffle();
-        wordsForQuestion[0] = WORDS_ARRAY.removeIndex(0);
-        for (int i = 1; i <= 3; i++)
-            wordsForQuestion[i] = WORDS_ARRAY.get(i);
-    }
+
 //
 //    public static boolean setNewCurrentPresident(boolean isRightAnswer) {
 //        if (wordsForQuestion.size > 0) {
@@ -170,7 +187,7 @@ public class GameManager {
 //        } else return false;
 //    }
 
-    public WordToRead[] getWordsForQuestion() {
+    public Array<WordToRead> getWordsForQuestion() {
         return wordsForQuestion;
     }
 

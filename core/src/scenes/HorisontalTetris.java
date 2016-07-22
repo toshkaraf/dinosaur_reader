@@ -25,9 +25,9 @@ import huds.SyllablePanel;
 /**
  * Created by Антон on 01.06.2016.
  */
-public class HorisontalTetris implements Screen, InputProcessor {
+public class
+HorisontalTetris implements Screen, InputProcessor {
 
-    Texture dinosaur;
     SpriteBatch batch;
     Sprite background, player;
     Viewport viewport;
@@ -51,14 +51,10 @@ public class HorisontalTetris implements Screen, InputProcessor {
     @Override
     public void show() {
 
-        GameManager.getInstance().firstInitNewGame();
-//        GameManager.setNewCurrentPresident(true);
-//        if (GameManager.getInstance().quantityOfSyllables == 0) decoratorWithCards = new DecoratorChooseFromAll(game);
-//        else decoratorWithCards = new DecoratorWIthCards(game);
+        GameManager.getInstance().initNewGame();
         decoratorWithCards = new DecoratorWIthCards(game);
         syllablePanel = new SyllablePanel(game);
         scorePanel = new ScorePanel(game);
-        dinosaur = new Texture(Gdx.files.internal("Backgrounds/USAPresidentsBackground_game.jpg"));
 //        bg = new Texture(Gdx.files.internal("Backgrounds/background_1.jpg"));
         background = new Sprite(new Texture(Gdx.files.internal("Backgrounds/background_1.jpg")));
         background.setSize(GameInfo.WORLD_WIDTH, GameInfo.WORLD_HEIGHT);
@@ -68,6 +64,7 @@ public class HorisontalTetris implements Screen, InputProcessor {
         camera = decoratorWithCards.getCamera();
         camera.position.set(GameInfo.WORLD_WIDTH / 2, GameInfo.WORLD_HEIGHT / 2, 0);
         setInitialPlayerPosition();
+        Gdx.input.setInputProcessor(this);
 
         viewport = new StretchViewport(GameInfo.WORLD_WIDTH, GameInfo.WORLD_HEIGHT, camera);
         syllablePanel.pushSyllable(syllableCounter);
@@ -92,9 +89,6 @@ public class HorisontalTetris implements Screen, InputProcessor {
             case ShowSyllables:
                 syllablePanel.getStage().draw();
                 syllablePanel.getStage().act();
-//                if (switcher) {
-//                    switcher = false;
-//                }
                 break;
             case PrepareField:
                 decoratorWithCards.getStage().draw();
@@ -124,11 +118,14 @@ public class HorisontalTetris implements Screen, InputProcessor {
                         if (GameManager.getInstance().gameData.isSounds())
                             GameManager.getInstance().getRightSound().play(1f);
                         scorePanel.incrementScore();
+                        GameManager.getInstance().clearRightWord();
 //                    score++;
                     } else {
                         if (GameManager.getInstance().gameData.isSounds())
                             GameManager.getInstance().getWrongSound().play(1f);
                     }
+                    GameManager.getInstance().initNewTask();
+                    syllablePanel = new SyllablePanel(game);
                     decoratorWithCards.pullCards();
                     GameManager.renderMode = GameManager.RenderMode.PullPictureCards;
                 }
@@ -139,11 +136,6 @@ public class HorisontalTetris implements Screen, InputProcessor {
                 break;
             case ShowPrise:
                 if (scorePanel.getScore() == GameInfo.MAX_SCORE) {
-//                    batch.setProjectionMatrix(camera.projection);
-//                    batch.setTransformMatrix(camera.view);
-//                    batch.begin();
-//                    batch.draw(dinosaur, player.getX(), player.getY());
-//                    batch.end();
                     game.setScreen(new PrizeScreenMenu(game));
                 } else {
                     GameManager.renderMode = GameManager.RenderMode.ShowSyllables;
@@ -212,17 +204,17 @@ public class HorisontalTetris implements Screen, InputProcessor {
 
     void updatePlayerAndCamY() {
 
-        if (isUpMove && player.getY() < background.getHeight() - player.getHeight()) {
+        if (isUpMove && player.getY() < background.getHeight() - GameInfo.WORLD_HEIGHT / 2 + GameInfo.HEIGHT_OF_PICTURE_CARD / 2 - player.getHeight() / 2 + 10) {
             player.setY(player.getY() + GameInfo.STEP_FOR_TETRIS_Y);
-            if ((camera.position.y <= background.getHeight() - GameInfo.WORLD_HEIGHT / 2 - GameInfo.STEP_FOR_TETRIS_Y) &&
-                    (player.getY() >= GameInfo.WORLD_HEIGHT / 2 - player.getHeight() / 2))
-                camera.position.y = camera.position.y + GameInfo.STEP_FOR_TETRIS_Y;
+//            if ((camera.position.y <= background.getHeight() - GameInfo.WORLD_HEIGHT / 2 - GameInfo.STEP_FOR_TETRIS_Y) &&
+//                    (player.getY() >= GameInfo.WORLD_HEIGHT / 2 - player.getHeight() / 2))
+//                camera.position.y = camera.position.y + GameInfo.STEP_FOR_TETRIS_Y;
         }
-        if (isDownMove && player.getY() > 0) {
+        if (isDownMove && player.getY() >= GameInfo.WORLD_HEIGHT / 2 - GameInfo.HEIGHT_OF_PICTURE_CARD / 2 - player.getHeight() / 2 - 10) {
             player.setY(player.getY() - GameInfo.STEP_FOR_TETRIS_Y);
-            if ((camera.position.y >= GameInfo.WORLD_HEIGHT / 2 + GameInfo.STEP_FOR_TETRIS_Y) &&
-                    (player.getY() <= background.getHeight() - GameInfo.WORLD_HEIGHT / 2 - player.getHeight() / 2))
-                camera.position.y = camera.position.y - GameInfo.STEP_FOR_TETRIS_Y;
+//            if ((camera.position.y >= GameInfo.WORLD_HEIGHT / 2 + GameInfo.STEP_FOR_TETRIS_Y) &&
+//                    (player.getY() <= background.getHeight() - GameInfo.WORLD_HEIGHT / 2 - player.getHeight() / 2))
+//                camera.position.y = camera.position.y - GameInfo.STEP_FOR_TETRIS_Y;
         }
     }
 
@@ -231,13 +223,12 @@ public class HorisontalTetris implements Screen, InputProcessor {
     }
 
     void setInitialPlayerPosition() {
-        player.setPosition(GameInfo.START_X_POSITION_OF_TETRIS_PLAYER, (2 * GameInfo.HIGH_OF_PICTURE_CARD));
-        Gdx.input.setInputProcessor(this);
+        player.setPosition(GameInfo.START_X_POSITION_OF_TETRIS_PLAYER, (GameInfo.WORLD_HEIGHT / 2 - GameInfo.HEIGHT_OF_PICTURE_CARD / 2) - player.getHeight() / 2);
     }
 
     boolean checkAnswer() {
-        return ((player.getY() + player.getHeight() / 2 >= GameManager.getInstance().currentRightWord * GameInfo.HIGH_OF_PICTURE_CARD) &&
-                (player.getY() + player.getHeight() / 2 <= GameManager.getInstance().currentRightWord * GameInfo.HIGH_OF_PICTURE_CARD + GameInfo.HIGH_OF_PICTURE_CARD));
+        return ((player.getY() + player.getHeight() / 2 >= GameManager.getInstance().currentRightWord * GameInfo.HEIGHT_OF_PICTURE_CARD) &&
+                (player.getY() + player.getHeight() / 2 <= GameManager.getInstance().currentRightWord * GameInfo.HEIGHT_OF_PICTURE_CARD + GameInfo.HEIGHT_OF_PICTURE_CARD));
     }
 
     void gameOver() {

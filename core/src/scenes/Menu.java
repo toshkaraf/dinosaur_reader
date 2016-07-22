@@ -26,7 +26,7 @@ public class Menu extends ScreenAdapter {
     public Menu(MainGame game, MenuButtons menuButtons) {
         this.game = game;
         btns = menuButtons;
-        background = new Texture(Gdx.files.internal("Backgrounds/USAPresidentsBgd.png"));
+        background = new Texture(Gdx.files.internal("Backgrounds/background_1.jpg"));
 
     }
 

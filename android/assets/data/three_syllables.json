@@ -1,0 +1,642 @@
+[
+  {
+    "name": "01_bananу",
+    "syllables": [
+      "ба",
+      "нa",
+      "ны"
+    ]
+  },
+  {
+    "name": "02_mashina",
+    "syllables": [
+      "ма",
+      "ши",
+      "на"
+    ]
+  },
+  {
+    "name": "03_dinozavr",
+    "syllables": [
+      "ди",
+      "но",
+      "завр"
+    ]
+  },
+  {
+    "name": "04_lopata",
+    "syllables": [
+      "ло",
+      "па",
+      "та"
+    ]
+  },
+  {
+    "name": "05_strekoza",
+    "syllables": [
+      "стре",
+      "ко",
+      "за"
+    ]
+  },
+  {
+    "name": "06_telefon",
+    "syllables": [
+      "те",
+      "ле",
+      "фон"
+    ]
+  },
+  {
+    "name": "07_derevo",
+    "syllables": [
+      "де",
+      "ре",
+      "во"
+    ]
+  },
+  {
+    "name": "08_raketa",
+    "syllables": [
+      "ра",
+      "ке",
+      "та"
+    ]
+  },
+  {
+    "name": "09_futbolist",
+    "syllables": [
+      "фу",
+      "тбо",
+      "лист"
+    ]
+  },
+  {
+    "name": "10_muhomor",
+    "syllables": [
+      "му",
+      "хо",
+      "мор"
+    ]
+  },
+  {
+    "name": "11_pozharnik",
+    "syllables": [
+      "по",
+      "жар",
+      "ник"
+    ]
+  },
+  {
+    "name": "12_konfety",
+    "syllables": [
+      "кон",
+      "фе",
+      "ты"
+    ]
+  },
+  {
+    "name": "13_podarok",
+    "syllables": [
+      "по",
+      "да",
+      "рок"
+    ]
+  },
+  {
+    "name": "14_oblako",
+    "syllables": [
+      "о",
+      "бла",
+      "ко"
+    ]
+  },
+  {
+    "name": "15_raduga",
+    "syllables": [
+      "ра",
+      "ду",
+      "га"
+    ]
+  },
+  {
+    "name": "16_rediska",
+    "syllables": [
+      "ре",
+      "ди",
+      "ска"
+    ]
+  },
+  {
+    "name": "17_avtobus",
+    "syllables": [
+      "а",
+      "вто",
+      "бус"
+    ]
+  },
+  {
+    "name": "18_noutbuk",
+    "syllables": [
+      "но",
+      "ут",
+      "бук"
+    ]
+  },
+  {
+    "name": "19_korobka",
+    "syllables": [
+      "ко",
+      "ро",
+      "бка"
+    ]
+  },
+  {
+    "name": "20_pistolet",
+    "syllables": [
+      "пи",
+      "сто",
+      "лет"
+    ]
+  },
+  {
+    "name": "21_gazeta",
+    "syllables": [
+      "га",
+      "зе",
+      "та"
+    ]
+  },
+  {
+    "name": "22_lampochka",
+    "syllables": [
+      "лам",
+      "по",
+      "чка"
+    ]
+  },
+  {
+    "name": "23_kapusta",
+    "syllables": [
+      "ка",
+      "пу",
+      "ста"
+    ]
+  },
+  {
+    "name": "24_podsnezhnik",
+    "syllables": [
+      "по",
+      "дсне",
+      "жник"
+    ]
+  },
+  {
+    "name": "25_snegovik",
+    "syllables": [
+      "сне",
+      "го",
+      "вик"
+    ]
+  },
+  {
+    "name": "26_komp'juter",
+    "syllables": [
+      "ком",
+      "пью",
+      "тер"
+    ]
+  },
+  {
+    "name": "27_shahmaty",
+    "syllables": [
+      "ша",
+      "хма",
+      "ты"
+    ]
+  },
+  {
+    "name": "28_vetochka",
+    "syllables": [
+      "ве",
+      "то",
+      "чка"
+    ]
+  },
+  {
+    "name": "29_jabloko",
+    "syllables": [
+      "я",
+      "бло",
+      "ко"
+    ]
+  },
+  {
+    "name": "30_ljagushka",
+    "syllables": [
+      "ля",
+      "гу",
+      "шка"
+    ]
+  },
+  {
+    "name": "31_zontiki",
+    "syllables": [
+      "зон",
+      "ти",
+      "ки"
+    ]
+  },
+  {
+    "name": "32_morkovka",
+    "syllables": [
+      "мор",
+      "ко",
+      "вка"
+    ]
+  },
+  {
+    "name": "33_leopard",
+    "syllables": [
+      "ле",
+      "о",
+      "пард"
+    ]
+  },
+  {
+    "name": "34_mikroskop",
+    "syllables": [
+      "ми",
+      "кро",
+      "скоп"
+    ]
+  },
+  {
+    "name": "35_budil'nik",
+    "syllables": [
+      "бу",
+      "диль",
+      "ник"
+    ]
+  },
+  {
+    "name": "36_samoljot",
+    "syllables": [
+      "са",
+      "мо",
+      "лёт"
+    ]
+  },
+  {
+    "name": "37_brilliant",
+    "syllables": [
+      "бри",
+      "лли",
+      "ант"
+    ]
+  },
+  {
+    "name": "38_gitara",
+    "syllables": [
+      "ги",
+      "та",
+      "ра"
+    ]
+  },
+  {
+    "name": "39_sobaka",
+    "syllables": [
+      "со",
+      "ба",
+      "ка"
+    ]
+  },
+  {
+    "name": "40_tjul'pany",
+    "syllables": [
+      "тюль",
+      "па",
+      "ны"
+    ]
+  },
+  {
+    "name": "41_kolbasa",
+    "syllables": [
+      "кол",
+      "ба",
+      "са"
+    ]
+  },
+  {
+    "name": "42_baklazhan",
+    "syllables": [
+      "ба",
+      "кла",
+      "жан"
+    ]
+  },
+  {
+    "name": "43_tabletki",
+    "syllables": [
+      "та",
+      "бле",
+      "тки"
+    ]
+  },
+  {
+    "name": "44_antenna",
+    "syllables": [
+      "ан",
+      "те",
+      "нна"
+    ]
+  },
+  {
+    "name": "45_rozetki",
+    "syllables": [
+      "ро",
+      "зе",
+      "тки"
+    ]
+  },
+  {
+    "name": "46_fonarik",
+    "syllables": [
+      "фо",
+      "на",
+      "рик"
+    ]
+  },
+  {
+    "name": "47_chemodan",
+    "syllables": [
+      "че",
+      "мо",
+      "дан"
+    ]
+  },
+  {
+    "name": "48_ovechka",
+    "syllables": [
+      "о",
+      "ве",
+      "чка"
+    ]
+  },
+  {
+    "name": "49_ulitka",
+    "syllables": [
+      "у",
+      "ли",
+      "тка"
+    ]
+  },
+  {
+    "name": "50_muravej",
+    "syllables": [
+      "му",
+      "ра",
+      "вей"
+    ]
+  },
+  {
+    "name": "51_ruletka",
+    "syllables": [
+      "ру",
+      "ле",
+      "тка"
+    ]
+  },
+  {
+    "name": "52_telezhka",
+    "syllables": [
+      "те",
+      "ле",
+      "жка"
+    ]
+  },
+  {
+    "name": "53_popugaj",
+    "syllables": [
+      "по",
+      "пу",
+      "гай"
+    ]
+  },
+  {
+    "name": "54_del'finy",
+    "syllables": [
+      "дель",
+      "фи",
+      "ны"
+    ]
+  },
+  {
+    "name": "55_vinograd",
+    "syllables": [
+      "ви",
+      "но",
+      "град"
+    ]
+  },
+  {
+    "name": "56_kastrjulja",
+    "syllables": [
+      "ка",
+      "стрю",
+      "ля"
+    ]
+  },
+  {
+    "name": "57_soroka",
+    "syllables": [
+      "со",
+      "ро",
+      "ка"
+    ]
+  },
+  {
+    "name": "58_klubnika",
+    "syllables": [
+      "клу",
+      "бни",
+      "ка"
+    ]
+  },
+  {
+    "name": "59_jaguar",
+    "syllables": [
+      "я",
+      "гу",
+      "ар"
+    ]
+  },
+  {
+    "name": "60_korova",
+    "syllables": [
+      "ко",
+      "ро",
+      "ва"
+    ]
+  },
+  {
+    "name": "61_butylka",
+    "syllables": [
+      "бу",
+      "тыл",
+      "ка"
+    ]
+  },
+  {
+    "name": "62_cypljonok",
+    "syllables": [
+      "цы",
+      "плё",
+      "нок"
+    ]
+  },
+  {
+    "name": "63_otvjortka",
+    "syllables": [
+      "о",
+      "твёр",
+      "тка"
+    ]
+  },
+  {
+    "name": "64_ohotnik",
+    "syllables": [
+      "о",
+      "хо",
+      "тник"
+    ]
+  },
+  {
+    "name": "65_kanistra",
+    "syllables": [
+      "ка",
+      "ни",
+      "стра"
+    ]
+  },
+  {
+    "name": "66_linejka",
+    "syllables": [
+      "ли",
+      "ней",
+      "ка"
+    ]
+  },
+  {
+    "name": "67_mandarin",
+    "syllables": [
+      "ман",
+      "да",
+      "рин"
+    ]
+  },
+  {
+    "name": "68_karandash",
+    "syllables": [
+      "ка",
+      "ран",
+      "даш"
+    ]
+  },
+  {
+    "name": "69_krossovki",
+    "syllables": [
+      "кро",
+      "ссо",
+      "вки"
+    ]
+  },
+  {
+    "name": "70_kosatka",
+    "syllables": [
+      "ко",
+      "са",
+      "тка"
+    ]
+  },
+  {
+    "name": "71_korona",
+    "syllables": [
+      "ко",
+      "ро",
+      "на"
+    ]
+  },
+  {
+    "name": "72_molotok",
+    "syllables": [
+      "мо",
+      "ло",
+      "ток"
+    ]
+  },
+  {
+    "name": "73_pomidor",
+    "syllables": [
+      "по",
+      "ми",
+      "дор"
+    ]
+  },
+  {
+    "name": "74_krokodil",
+    "syllables": [
+      "кро",
+      "ко",
+      "дил"
+    ]
+  },
+  {
+    "name": "75_cisterna",
+    "syllables": [
+      "ци",
+      "стер",
+      "на"
+    ]
+  },
+  {
+    "name": "76_tochilka",
+    "syllables": [
+      "то",
+      "чил",
+      "ка"
+    ]
+  },
+  {
+    "name": "77_faraon",
+    "syllables": [
+      "фа",
+      "ра",
+      "он"
+    ]
+  },
+  {
+    "name": "78_mikrofon",
+    "syllables": [
+      "ми",
+      "кро",
+      "фон"
+    ]
+  },
+  {
+    "name": "79_jeskimo",
+    "syllables": [
+      "э",
+      "ски",
+      "мо"
+    ]
+  },
+  {
+    "name": "80_kamera",
+    "syllables": [
+      "ка",
+      "ме",
+      "ра"
+    ]
+  }
+]

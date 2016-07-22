@@ -22,7 +22,7 @@ public class MenuCard extends Stack {
         add(new Image(new SpriteDrawable(card)));
         setBounds(getX(), getY(), card.getWidth(), card.getHeight());
         setPosition(x, y);
-        Label label = new Label(text, new Label.LabelStyle(GameInfo.NAME_FONT, Color.WHITE));
+        Label label = new Label(text, new Label.LabelStyle(GameInfo.MENU_FONT, Color.WHITE));
         label.setAlignment(Align.center);
         add(label);
     }
