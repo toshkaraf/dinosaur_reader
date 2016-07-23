@@ -51,7 +51,6 @@ HorisontalTetris implements Screen, InputProcessor {
     @Override
     public void show() {
 
-        GameManager.getInstance().initNewGame();
         decoratorWithCards = new DecoratorWIthCards(game);
         syllablePanel = new SyllablePanel(game);
         scorePanel = new ScorePanel(game);

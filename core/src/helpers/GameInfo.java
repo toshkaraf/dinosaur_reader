@@ -11,7 +11,7 @@ public class GameInfo {
     public static final int WORLD_WIDTH = 800;
     public static final int WORLD_HEIGHT = 480;
 
-    public static final int MAX_SCORE = 2;
+    public static final int MAX_SCORE = 5;
 
     public static final float RESIZE_PROPORTION_X = (float)Gdx.graphics.getWidth()/(float)WORLD_WIDTH;
     public static final float RESIZE_PROPORTION_Y = (float)Gdx.graphics.getHeight()/(float)WORLD_HEIGHT;

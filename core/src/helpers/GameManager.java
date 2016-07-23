@@ -36,6 +36,7 @@ public class GameManager {
     public int currentRightWord; // number in array
     public int quantityOfSyllables = 0;
     private String syllablesFileName;
+    private String prizeFolderName = "dinosaurs";
     public static RenderMode renderMode;
     public GameData gameData = new GameData();
     public Sound[] rightSounds = new Sound[6];
@@ -218,6 +219,15 @@ public class GameManager {
             music.stop();
             music.dispose();
         }
+    }
+
+
+    public String getPrizeFolderName() {
+        return prizeFolderName;
+    }
+
+    public void setPrizeFolderName(String prizeFolderName) {
+        this.prizeFolderName = prizeFolderName;
     }
 
     public static GameManager getInstance() {

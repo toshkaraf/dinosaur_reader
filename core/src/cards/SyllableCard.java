@@ -23,7 +23,7 @@ public class SyllableCard extends Table {
 //        bg.setSize(GameInfo.WIDTH_OF_SYLLABLE_CARD, GameInfo.HIGH_OF_SYLLABLE_CARD);
         setBackground(new SpriteDrawable(bg));
         Label label = new Label(GameManager.getInstance().wordsForQuestion.get(GameManager.getInstance().currentRightWord).getSyllables()[numberOfSyllable],
-                new Label.LabelStyle(GameInfo.SYLLABLE_FONT, Color.WHITE));
+                new Label.LabelStyle(GameInfo.SYLLABLE_FONT, Color.BROWN));
         add(label);
         bg.setSize(label.getWidth()+30, GameInfo.HIGH_OF_SYLLABLE_CARD);
         setBounds(getX(), getY(), bg.getWidth(), bg.getHeight());
