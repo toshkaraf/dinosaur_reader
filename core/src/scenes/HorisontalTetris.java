@@ -35,13 +35,12 @@ HorisontalTetris implements Screen, InputProcessor {
     DecoratorWIthCards decoratorWithCards;
     SyllablePanel syllablePanel;
     ScorePanel scorePanel;
-    boolean switcher = true;
-    boolean isRightAnswer, isPlayerFlinged;
+    boolean isRightAnswer;
     MainGame game;
     protected boolean isUpMove, isDownMove;
-    private Sound victorySound;
     private int playerMoveDelayCounter = 0, syllableCounter = 0, score = 0;
     Vector3 worldCoordinates;
+    private float flingedCoordinateY = 0;
 
 
     public HorisontalTetris(MainGame game) {
@@ -51,11 +50,9 @@ HorisontalTetris implements Screen, InputProcessor {
     @Override
     public void show() {
 
-        GameManager.getInstance().initNewGame();
         decoratorWithCards = new DecoratorWIthCards(game);
         syllablePanel = new SyllablePanel(game);
         scorePanel = new ScorePanel(game);
-//        bg = new Texture(Gdx.files.internal("Backgrounds/background_1.jpg"));
         background = new Sprite(new Texture(Gdx.files.internal("Backgrounds/background_1.jpg")));
         background.setSize(GameInfo.WORLD_WIDTH, GameInfo.WORLD_HEIGHT);
         player = new Sprite(new Texture(Gdx.files.internal("players/arrowUSA.png")));
@@ -98,7 +95,7 @@ HorisontalTetris implements Screen, InputProcessor {
                 decoratorWithCards.getStage().draw();
                 decoratorWithCards.getStage().act();
                 if (player.getX() + player.getWidth() <= GameInfo.WORLD_WIDTH) {
-                    if (isPlayerFlinged) player.setX(player.getX() + 30);
+                    if (flingedCoordinateY != 0) player.setPosition(player.getX() + 30, flingedCoordinateY - player.getHeight()/2);
 //                    queryInput();   //do not use in android
 //                    camera.update();  //do not use in android
                     batch.setProjectionMatrix(camera.projection);
@@ -113,7 +110,7 @@ HorisontalTetris implements Screen, InputProcessor {
                     } else playerMoveDelayCounter++;
                 } else {
                     isRightAnswer = checkAnswer();
-                    isPlayerFlinged = false;
+                    flingedCoordinateY = 0;
                     if (isRightAnswer) {
                         if (GameManager.getInstance().gameData.isSounds())
                             GameManager.getInstance().getRightSound().play(1f);
@@ -223,7 +220,7 @@ HorisontalTetris implements Screen, InputProcessor {
     }
 
     void setInitialPlayerPosition() {
-        player.setPosition(GameInfo.START_X_POSITION_OF_TETRIS_PLAYER, (GameInfo.WORLD_HEIGHT / 2 - GameInfo.HEIGHT_OF_PICTURE_CARD / 2) - player.getHeight() / 2);
+        player.setPosition(GameInfo.START_X_POSITION_OF_TETRIS_PLAYER, (GameInfo.WORLD_HEIGHT / 2 - player.getHeight() / 2));
     }
 
     boolean checkAnswer() {
@@ -296,20 +293,20 @@ HorisontalTetris implements Screen, InputProcessor {
 
             case PlayGame:
                 worldCoordinates = camera.unproject(new Vector3(screenX, screenY, 0));
-                if (worldCoordinates.x < GameInfo.WORLD_WIDTH / 2) {
-                    if (worldCoordinates.y < camera.position.y) {
-                        isDownMove = true;
-                        return true;
-                    }
-                    if (worldCoordinates.y > camera.position.y) {
-                        isUpMove = true;
-                        return true;
-                    }
-                } else {
-                    isPlayerFlinged = true;
+//                if (worldCoordinates.x < GameInfo.WORLD_WIDTH / 2) {
+//                    if (worldCoordinates.y < camera.position.y) {
+//                        isDownMove = true;
+//                        return true;
+//                    }
+//                    if (worldCoordinates.y > camera.position.y) {
+//                        isUpMove = true;
+//                        return true;
+//                    }
+//                } else {
+                    flingedCoordinateY = worldCoordinates.y;
                     return true;
-                }
-                break;
+//                }
+//                break;
 
             case ShowPrise:
                 GameManager.renderMode = GameManager.RenderMode.ShowSyllables;

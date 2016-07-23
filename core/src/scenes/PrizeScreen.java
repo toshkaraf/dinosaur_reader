@@ -36,11 +36,9 @@ public class PrizeScreen extends ScreenAdapter {
         gameViewport = new StretchViewport(GameInfo.WORLD_WIDTH, GameInfo.WORLD_HEIGHT,
                 new OrthographicCamera());
         stage = new Stage(gameViewport, new SpriteBatch());
-
-//        background = new Sprite(new Texture(Gdx.files.internal("Backgrounds/background_1.jpg")));
+        Gdx.input.setInputProcessor(stage);
         prizeImage.setPosition(0, 0);
         prizeImage.setSize(GameInfo.WORLD_WIDTH, GameInfo.WORLD_HEIGHT);
-//        background.setSize(GameInfo.WORLD_WIDTH, GameInfo.WORLD_HEIGHT);
         prizeImage.addListener(new ClickListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 game.setScreen(new HorisontalTetris(game));

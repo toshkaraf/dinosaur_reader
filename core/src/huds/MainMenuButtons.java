@@ -37,6 +37,7 @@ public class MainMenuButtons extends MenuButtons {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttons) {
                 GameManager.getInstance().setQuantityOfSyllables(2);
+                GameManager.getInstance().initNewGame();
                 hideMenu_startNewScreen(new HorisontalTetris(game));
                 return true;
             }
@@ -46,6 +47,7 @@ public class MainMenuButtons extends MenuButtons {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttons) {
                 GameManager.getInstance().setQuantityOfSyllables(3);
+                GameManager.getInstance().initNewGame();
                 hideMenu_startNewScreen(new HorisontalTetris(game));
                 return true;
             }
