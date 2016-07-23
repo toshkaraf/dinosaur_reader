@@ -4,12 +4,13 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.input.GestureDetector;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -26,7 +27,7 @@ import huds.SyllablePanel;
  * Created by Антон on 01.06.2016.
  */
 public class
-HorisontalTetris implements Screen, InputProcessor {
+HorisontalTetris implements Screen, GestureDetector.GestureListener {
 
     SpriteBatch batch;
     Sprite background, player;
@@ -61,10 +62,12 @@ HorisontalTetris implements Screen, InputProcessor {
         camera = decoratorWithCards.getCamera();
         camera.position.set(GameInfo.WORLD_WIDTH / 2, GameInfo.WORLD_HEIGHT / 2, 0);
         setInitialPlayerPosition();
-        Gdx.input.setInputProcessor(this);
+
+        GestureDetector gd = new GestureDetector(this);
+        Gdx.input.setInputProcessor(gd);
 
         viewport = new StretchViewport(GameInfo.WORLD_WIDTH, GameInfo.WORLD_HEIGHT, camera);
-        syllablePanel.pushSyllable(syllableCounter);
+        syllablePanel.pushFirstSyllable(syllableCounter);
         GameManager.renderMode = GameManager.RenderMode.ShowSyllables;
     }
 
@@ -95,7 +98,8 @@ HorisontalTetris implements Screen, InputProcessor {
                 decoratorWithCards.getStage().draw();
                 decoratorWithCards.getStage().act();
                 if (player.getX() + player.getWidth() <= GameInfo.WORLD_WIDTH) {
-                    if (flingedCoordinateY != 0) player.setPosition(player.getX() + 30, flingedCoordinateY - player.getHeight()/2);
+                    if (flingedCoordinateY != 0)
+                        player.setPosition(player.getX() + 30, flingedCoordinateY - player.getHeight() / 2);
 //                    queryInput();   //do not use in android
 //                    camera.update();  //do not use in android
                     batch.setProjectionMatrix(camera.projection);
@@ -136,7 +140,7 @@ HorisontalTetris implements Screen, InputProcessor {
                     game.setScreen(new PrizeScreenMenu(game));
                 } else {
                     GameManager.renderMode = GameManager.RenderMode.ShowSyllables;
-                    syllablePanel.pushSyllable(syllableCounter);
+                    syllablePanel.pushFirstSyllable(syllableCounter);
                     setInitialPlayerPosition();
                 }
                 break;
@@ -259,37 +263,22 @@ HorisontalTetris implements Screen, InputProcessor {
     }
 
     @Override
-    public boolean keyDown(int keycode) {
-        return false;
-    }
-
-    @Override
-    public boolean keyUp(int keycode) {
-        return false;
-    }
-
-    @Override
-    public boolean keyTyped(char character) {
-        return false;
-    }
-
-    @Override
-    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+    public boolean touchDown(float screenX, float screenY, int pointer, int button) {
 
         switch (GameManager.renderMode) {
-            case ShowSyllables:
-                if (syllableCounter <= GameManager.getInstance().quantityOfSyllables - 1) {
-                    syllablePanel.pullSyllable(syllableCounter);
-                    if (syllableCounter == GameManager.getInstance().quantityOfSyllables - 1) {
-                        syllableCounter = 0;
-                        decoratorWithCards.createAndPushCards();
-                    } else {
-                        syllableCounter++;
-                        syllablePanel.pushSyllable(syllableCounter);
-                    }
-                    return true;
-                }
-                break;
+//                case ShowSyllables:
+//                    if (syllableCounter <= GameManager.getInstance().quantityOfSyllables - 1) {
+//                        syllablePanel.pullLastSyllable(syllableCounter);
+//                        if (syllableCounter == GameManager.getInstance().quantityOfSyllables - 1) {
+//                            syllableCounter = 0;
+//                            decoratorWithCards.createAndPushCards();
+//                        } else {
+//                            syllableCounter++;
+//                            syllablePanel.pushFirstSyllable(syllableCounter);
+//                        }
+//                        return true;
+//                    }
+//                    break;
 
             case PlayGame:
                 worldCoordinates = camera.unproject(new Vector3(screenX, screenY, 0));
@@ -303,43 +292,74 @@ HorisontalTetris implements Screen, InputProcessor {
 //                        return true;
 //                    }
 //                } else {
-                    flingedCoordinateY = worldCoordinates.y;
-                    return true;
+                flingedCoordinateY = worldCoordinates.y;
+                return true;
 //                }
 //                break;
 
             case ShowPrise:
                 GameManager.renderMode = GameManager.RenderMode.ShowSyllables;
                 scorePanel.resetCounter();
-                syllablePanel.pushSyllable(syllableCounter);
+                syllablePanel.pushFirstSyllable(syllableCounter);
                 setInitialPlayerPosition();
                 return true;
         }
         return false;
-
-
     }
 
     @Override
-    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        isUpMove = false;
-        isDownMove = false;
+    public boolean tap(float x, float y, int count, int button) {
         return false;
     }
 
     @Override
-    public boolean touchDragged(int screenX, int screenY, int pointer) {
+    public boolean longPress(float x, float y) {
         return false;
     }
 
     @Override
-    public boolean mouseMoved(int screenX, int screenY) {
+    public boolean fling(float velocityX, float velocityY, int button) {
+        if (GameManager.renderMode == GameManager.RenderMode.ShowSyllables) {
+            if (velocityX < 0) {
+                if (syllableCounter == GameManager.getInstance().quantityOfSyllables-1) {
+                    syllablePanel.pullLastSyllable(syllableCounter);
+                    syllableCounter = 0;
+                    decoratorWithCards.createAndPushCards();
+                } else syllablePanel.changeSyllableForword(syllableCounter++);
+
+                return true;
+            }
+            if (velocityX > 0) {
+                if (syllableCounter != 0)
+                    syllablePanel.changeSyllableBack(syllableCounter--);
+                return true;
+            }
+        }
         return false;
     }
 
     @Override
-    public boolean scrolled(int amount) {
+    public boolean pan(float x, float y, float deltaX, float deltaY) {
         return false;
     }
 
+    @Override
+    public boolean panStop(float x, float y, int pointer, int button) {
+        return false;
+    }
+
+    @Override
+    public boolean zoom(float initialDistance, float distance) {
+        return false;
+    }
+
+    @Override
+    public boolean pinch(Vector2 initialPointer1, Vector2 initialPointer2, Vector2 pointer1, Vector2 pointer2) {
+        return false;
+    }
+
+    @Override
+    public void pinchStop() {
+
+    }
 }

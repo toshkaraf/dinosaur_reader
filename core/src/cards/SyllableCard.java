@@ -27,21 +27,7 @@ public class SyllableCard extends Table {
         add(label);
         bg.setSize(label.getWidth()+30, GameInfo.HIGH_OF_SYLLABLE_CARD);
         setBounds(getX(), getY(), bg.getWidth(), bg.getHeight());
-
-        switch (numberOfSyllable) {
-            case 0:
-                initialPositionOfCard_X = -getWidth();
-                break;
-            case 1:
-                initialPositionOfCard_X = GameInfo.WORLD_WIDTH;
-                break;
-            case 2:
-                initialPositionOfCard_X = -getWidth();
-                break;
-            case 3:
-                initialPositionOfCard_X = GameInfo.WORLD_WIDTH;
-        }
-
+        initialPositionOfCard_X = GameInfo.WORLD_WIDTH;
         setPosition(initialPositionOfCard_X, GameInfo.WORLD_HEIGHT / 2 - GameInfo.HIGH_OF_SYLLABLE_CARD / 2);
 
         switch (GameManager.getInstance().quantityOfSyllables) {

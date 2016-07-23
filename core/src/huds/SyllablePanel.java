@@ -46,21 +46,34 @@ public class SyllablePanel {
 
     private void createSyllablePanel() {
         syllableCards = new Group();
-        for (int i = 0; i <= GameManager.getInstance().quantityOfSyllables-1; i++) {
+        for (int i = 0; i <= GameManager.getInstance().quantityOfSyllables - 1; i++) {
             syllableCards.addActor(new SyllableCard(bg, i));
         }
     }
 
-    public void pushSyllable(int numberOfSillable) {
-        SyllableCard card = syllableCards.findActor(String.valueOf(numberOfSillable));
-        card.addAction(moveTo(card.getFinalPositionOfCard_X(), card.getY(), .5f));
+    public void changeSyllableForword(int numberOfSillable) {
+            SyllableCard firstCard = syllableCards.findActor(String.valueOf(numberOfSillable));
+            SyllableCard secondCard = syllableCards.findActor(String.valueOf(numberOfSillable + 1));
+            firstCard.addAction(moveTo(-firstCard.getWidth(), firstCard.getY(), .3f));
+            secondCard.addAction(moveTo(secondCard.getFinalPositionOfCard_X(), secondCard.getY(), .3f));
     }
 
-    public void pullSyllable(int numberOfSillable) {
+    public void changeSyllableBack(int numberOfSillable) {
+        SyllableCard firstCard = syllableCards.findActor(String.valueOf(numberOfSillable));
+        SyllableCard secondCard = syllableCards.findActor(String.valueOf(numberOfSillable - 1));
+        firstCard.addAction(moveTo(GameInfo.WORLD_WIDTH, firstCard.getY(), .3f));
+        secondCard.addAction(moveTo(secondCard.getFinalPositionOfCard_X(), secondCard.getY(), .3f));
+
+    }
+
+    public void pushFirstSyllable(int numberOfSillable) {
         SyllableCard card = syllableCards.findActor(String.valueOf(numberOfSillable));
-        if (numberOfSillable < GameManager.getInstance().quantityOfSyllables - 1)
-            card.addAction(sequence(moveTo(card.getInitialPositionOfCard_X(), card.getY(),.5f),delay(.5f)));
-        else card.addAction(sequence(moveTo(card.getInitialPositionOfCard_X(), card.getY(),.5f),delay(.5f),
+        card.addAction(moveTo(card.getFinalPositionOfCard_X(), card.getY(), .3f));
+    }
+
+    public void pullLastSyllable(int numberOfSillable) {
+        SyllableCard card = syllableCards.findActor(String.valueOf(numberOfSillable));
+        card.addAction(sequence(moveTo(-card.getWidth(), card.getY(), .3f), delay(.5f),
                 new RenderModeAction(GameManager.RenderMode.PrepareField)));
     }
 
