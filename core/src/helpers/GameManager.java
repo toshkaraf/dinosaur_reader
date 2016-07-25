@@ -208,7 +208,7 @@ public class GameManager {
         if (!music.isPlaying()) {
             music = Gdx.audio.newMusic(Gdx.files.internal("Sounds/Manhattan_Beach.mp3"));
             music.setLooping(true);
-            music.setVolume(.4f);
+            music.setVolume(.2f);
             music.play();
         }
 

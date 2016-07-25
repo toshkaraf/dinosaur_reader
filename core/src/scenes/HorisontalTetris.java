@@ -39,7 +39,7 @@ HorisontalTetris implements Screen, GestureDetector.GestureListener {
     boolean isRightAnswer;
     MainGame game;
     protected boolean isUpMove, isDownMove;
-    private int playerMoveDelayCounter = 0, syllableCounter = 0, score = 0;
+    private int playerMoveDelayCounter = 0, syllableCounter = 0;
     Vector3 worldCoordinates;
     private float flingedCoordinateY = 0;
 
@@ -156,31 +156,6 @@ HorisontalTetris implements Screen, GestureDetector.GestureListener {
 //        drawScorePanel();
     }
 
-//    void drawScorePanel() {
-//        scorePanel.getStage().draw();
-//    }
-
-//    boolean moveCameraToY(float y) {
-//        if ((y <= GameInfo.WORLD_HEIGHT / 2 + 20 && camera.position.y <= GameInfo.WORLD_HEIGHT / 2 + 20) ||
-//                (y >= background.getHeight() - GameInfo.WORLD_HEIGHT / 2 - 20 &&
-//                        camera.position.y >= background.getHeight() - GameInfo.WORLD_HEIGHT / 2 - 20) ||
-//                (camera.position.y == y))
-//            return true;
-//        else {
-//            if (camera.position.y > y) {
-//                camera.position.y = camera.position.y - 20;
-//                if (camera.position.y <= y || camera.position.y <= GameInfo.WORLD_HEIGHT / 2 + 20)
-//                    return true;
-//            }
-//            if (camera.position.y < y) {
-//                camera.position.y = camera.position.y + 20;
-//                if (camera.position.y >= y || camera.position.y >= background.getHeight() - GameInfo.WORLD_HEIGHT / 2 - 20)
-//                    return true;
-//            }
-//        }
-//        return false;
-//    }
-
 
     //check for bounds
     //update player's and cameras coordinates
@@ -266,36 +241,10 @@ HorisontalTetris implements Screen, GestureDetector.GestureListener {
     public boolean touchDown(float screenX, float screenY, int pointer, int button) {
 
         switch (GameManager.renderMode) {
-//                case ShowSyllables:
-//                    if (syllableCounter <= GameManager.getInstance().quantityOfSyllables - 1) {
-//                        syllablePanel.pullLastSyllable(syllableCounter);
-//                        if (syllableCounter == GameManager.getInstance().quantityOfSyllables - 1) {
-//                            syllableCounter = 0;
-//                            decoratorWithCards.createAndPushCards();
-//                        } else {
-//                            syllableCounter++;
-//                            syllablePanel.pushFirstSyllable(syllableCounter);
-//                        }
-//                        return true;
-//                    }
-//                    break;
-
             case PlayGame:
                 worldCoordinates = camera.unproject(new Vector3(screenX, screenY, 0));
-//                if (worldCoordinates.x < GameInfo.WORLD_WIDTH / 2) {
-//                    if (worldCoordinates.y < camera.position.y) {
-//                        isDownMove = true;
-//                        return true;
-//                    }
-//                    if (worldCoordinates.y > camera.position.y) {
-//                        isUpMove = true;
-//                        return true;
-//                    }
-//                } else {
                 flingedCoordinateY = worldCoordinates.y;
                 return true;
-//                }
-//                break;
 
             case ShowPrise:
                 GameManager.renderMode = GameManager.RenderMode.ShowSyllables;

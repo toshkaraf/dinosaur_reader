@@ -57,8 +57,8 @@ public class PrizeScreenMenu extends ScreenAdapter {
                     GameManager.getInstance().getPrizeFolderName() + "/" + i + ".jpg")));
             spritePicture.setSize(120,80);
             final Image image = new Image(new SpriteDrawable(spritePicture));
+            image.setName(String.valueOf(i));
             pictureCard.add(image);
-            pictureCard.setName(String.valueOf(i));
             pictureCard.addListener(new ClickListener() {
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                     game.setScreen(new PrizeScreen(game, image));

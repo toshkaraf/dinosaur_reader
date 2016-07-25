@@ -2,6 +2,8 @@ package scenes;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -27,12 +29,16 @@ public class PrizeScreen extends ScreenAdapter {
     MainGame game;
     Sprite background;
     Image prizeImage;
+    Music prizeDescription;
 
 
     public PrizeScreen(final MainGame game, Image prizeImage) {
         this.game = game;
         this.prizeImage = prizeImage;
+    }
 
+    @Override
+    public void show() {
         gameViewport = new StretchViewport(GameInfo.WORLD_WIDTH, GameInfo.WORLD_HEIGHT,
                 new OrthographicCamera());
         stage = new Stage(gameViewport, new SpriteBatch());
@@ -42,10 +48,15 @@ public class PrizeScreen extends ScreenAdapter {
         prizeImage.addListener(new ClickListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 game.setScreen(new HorisontalTetris(game));
+                dispose();
                 return true;
             }
         });
+
         stage.addActor(prizeImage);
+        prizeDescription = Gdx.audio.newMusic(Gdx.files.internal("data/prize_pictures/turtles/audio/" + prizeImage.getName() + ".mp3"));
+        prizeDescription.setVolume(.4f);
+        prizeDescription.play();
     }
 
     @Override
@@ -60,5 +71,7 @@ public class PrizeScreen extends ScreenAdapter {
     @Override
     public void dispose(){
         stage.dispose();
+//        prizeDescription.stop();
+        prizeDescription.dispose();
     }
 }
