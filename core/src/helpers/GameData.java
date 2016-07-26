@@ -4,7 +4,7 @@ package helpers;
  * Created by Антон on 06.07.2016.
  */
 public class GameData {
-    int highScore;
+    int highScore = 50;
     boolean musicOn;
     boolean sounds = true;
 
@@ -30,5 +30,9 @@ public class GameData {
 
     public void setMusicOn(boolean musicOn) {
         this.musicOn = musicOn;
+    }
+
+    public void incrementHighScore(int i) {
+        highScore = highScore + i;
     }
 }

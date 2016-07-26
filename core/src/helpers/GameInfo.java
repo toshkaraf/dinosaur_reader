@@ -6,7 +6,7 @@ import com.toshkaraf.MainGame;
 
 public class GameInfo {
 
-    public static BitmapFont SYLLABLE_FONT, MENU_FONT;
+    public static BitmapFont SYLLABLE_FONT, MENU_FONT, SCORE_FONT;
 
     public static final int WORLD_WIDTH = 800;
     public static final int WORLD_HEIGHT = 480;
@@ -44,6 +44,6 @@ public class GameInfo {
 //        SYLLABLE_FONT = new BitmapFont(Gdx.files.internal("fonts/CardArialFont.fnt"));
         SYLLABLE_FONT = MyFontGenerator.getFont("fonts/arial.ttf", 100);
         MENU_FONT = MyFontGenerator.getFont("fonts/arial.ttf", 25);
-
+        SCORE_FONT = MyFontGenerator.getFont("fonts/arial.ttf", 60);
     }
 }

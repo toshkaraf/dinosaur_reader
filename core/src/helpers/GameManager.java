@@ -16,8 +16,7 @@ import models.WordToRead;
  */
 public class GameManager {
 
-    public int life = 3;
-    public int score = 100;
+    public int score = 50;
     private Music music;
     public Array<String> prizeNamesArray = new Array<String>();
 
@@ -26,7 +25,6 @@ public class GameManager {
     public enum TypeOfCard {BlueDate, RedDate, BlueName, RedName}
 
     private static GameManager ourInstance = new GameManager();
-    //    public WordToRead[] wordsForQuestion = new WordToRead[4];
     private static Json json = new Json();
     private FileHandle fileHandle = Gdx.files.local("bin/GameData.json");
     public Array<WordToRead> wordsForQuestion = new Array<WordToRead>();

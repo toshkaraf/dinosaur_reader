@@ -15,15 +15,12 @@ import helpers.GameManager;
  */
 public class PictureCard extends Table {
 
-//    float finalPositionOfCard_X;
-
     public PictureCard(Sprite card, int numberOfWord) {
         super();
 
         setName(GameManager.getInstance().wordsForQuestion.get(numberOfWord).getName());
         card.setSize(GameInfo.WIDTH_OF_PICTURE_CARD, GameInfo.HEIGHT_OF_PICTURE_CARD);
         setBackground(new SpriteDrawable(card));
-//        finalPositionOfCard_X = GameInfo.WORLD_WIDTH - GameInfo.WIDTH_OF_PICTURE_CARD;
         setBounds(getX(), getY(), card.getWidth(), card.getHeight());
         setY(numberOfWord * card.getHeight());
         Sprite picture = new Sprite(new Texture(Gdx.files.internal("pictures/" +
@@ -32,11 +29,4 @@ public class PictureCard extends Table {
         add(new Image(new SpriteDrawable(picture)));
     }
 
-//    public void push() {
-//        addAction(Actions.moveTo(finalPositionOfCard_X, getY(), 1f));
-//    }
-
-//    public float getFinalPositionOfCard_X() {
-//        return finalPositionOfCard_X;
-//    }
 }

@@ -1,6 +1,7 @@
 package huds;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -27,10 +28,8 @@ public class ScorePanel {
 
     Viewport gameViewport;
     Stage stage;
-    Table scoreTable;
     Label scoreLabel, lifeLabel;
-        Group scoreCoins = new Group();
-//    Array<Image> scoreCoins = new Array<Image>();
+    Group scoreCoins = new Group();
     int scoreCounter = 0;
 
     public ScorePanel(MainGame game) {
@@ -39,25 +38,19 @@ public class ScorePanel {
                 new OrthographicCamera());
         stage = new Stage(gameViewport, game.getBatch());
 
+        scoreLabel = new Label(String.valueOf(GameManager.getInstance().gameData.getHighScore()), new Label.LabelStyle(GameInfo.SCORE_FONT, Color.RED));
+        scoreLabel.setPosition(30, GameInfo.WORLD_HEIGHT - 100);
+
         for (int i = 0; i < GameInfo.MAX_SCORE; i++) {
             Image coin = new Image(new SpriteDrawable(new Sprite(new Texture(Gdx.files.internal("cards/coin.png")))));
             coin.setSize(50, 50);
-            coin.setBounds(coin.getX(),coin.getY(),coin.getWidth(),coin.getHeight());
-            coin.setPosition(50 + i*100, GameInfo.WORLD_HEIGHT);
+            coin.setBounds(coin.getX(), coin.getY(), coin.getWidth(), coin.getHeight());
+            coin.setPosition(50 + i * 100, GameInfo.WORLD_HEIGHT);
             coin.setName(String.valueOf(i));
             scoreCoins.addActor(coin);
         }
         stage.addActor(scoreCoins);
-
-
-
-//        scoreTable = new Table().top().padTop(20);
-//        scoreTable.setFillParent(true);
-//
-//        scoreTable.add(lifeLabel).spaceRight(100);
-//        scoreTable.add(scoreLabel);
-//        scoreTable.setBounds(scoreTable.getX(),scoreTable.getY(),scoreTable.getWidth(),scoreTable.getHeight());
-//        stage.addActor(scoreTable);
+        stage.addActor(scoreLabel);
     }
 
 
@@ -65,18 +58,17 @@ public class ScorePanel {
         return scoreCounter;
     }
 
-    public void resetCounter(){ scoreCounter = 0;
-    scoreCoins.clear();
+    public void resetCounter() {
+        scoreCounter = 0;
+        scoreCoins.clear();
     }
 
     public void incrementScore() {
         Image coin = scoreCoins.findActor(String.valueOf(scoreCounter++));
         coin.addAction(moveTo(coin.getX(), 30, .5f));
-    }
-
-    public void decrementLife() {
-        GameManager.getInstance().life--;
-        lifeLabel.setText(String.valueOf(GameManager.getInstance().life));
+        GameManager.getInstance().gameData.incrementHighScore(1);
+        scoreLabel = new Label(String.valueOf(GameManager.getInstance().gameData.getHighScore()), new Label.LabelStyle(GameInfo.SCORE_FONT, Color.RED));
+        scoreLabel.setPosition(30, GameInfo.WORLD_HEIGHT - 100);
     }
 
     public Stage getStage() {
