@@ -39,7 +39,8 @@ public class ScorePanel {
         stage = new Stage(gameViewport, game.getBatch());
 
         scoreLabel = new Label(String.valueOf(GameManager.getInstance().gameData.getHighScore()), new Label.LabelStyle(GameInfo.SCORE_FONT, Color.RED));
-        scoreLabel.setPosition(30, GameInfo.WORLD_HEIGHT - 100);
+        scoreLabel.setPosition(30, GameInfo.WORLD_HEIGHT - 80);
+        scoreLabel.setName("score");
 
         for (int i = 0; i < GameInfo.MAX_SCORE; i++) {
             Image coin = new Image(new SpriteDrawable(new Sprite(new Texture(Gdx.files.internal("cards/coin.png")))));
@@ -67,8 +68,9 @@ public class ScorePanel {
         Image coin = scoreCoins.findActor(String.valueOf(scoreCounter++));
         coin.addAction(moveTo(coin.getX(), 30, .5f));
         GameManager.getInstance().gameData.incrementHighScore(1);
-        scoreLabel = new Label(String.valueOf(GameManager.getInstance().gameData.getHighScore()), new Label.LabelStyle(GameInfo.SCORE_FONT, Color.RED));
-        scoreLabel.setPosition(30, GameInfo.WORLD_HEIGHT - 100);
+//        scoreLabel = scoreCoins.findActor("score");
+        scoreLabel.setText(String.valueOf(GameManager.getInstance().gameData.getHighScore()));
+        scoreLabel.setPosition(30, GameInfo.WORLD_HEIGHT - 80);
     }
 
     public Stage getStage() {
